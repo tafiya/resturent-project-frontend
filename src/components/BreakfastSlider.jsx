@@ -3,7 +3,8 @@
 import { useEffect, useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
-
+import { IoIosArrowForward } from "react-icons/io";
+import { IoIosArrowBack } from "react-icons/io";
 const slides = [
   {
     id: 1,
@@ -12,38 +13,38 @@ const slides = [
       "Breakfast, often referred to as the ‘most important meal of the day’, provides essential nutrients to kick start our day. It includes a variety of foods, like fruits, cereals, dairy products, and proteins, that contribute to a balanced diet.",
     image: "/res-1.png",
     thumbnail: "/res-1.png",
-    bgColor: "#800000",
-    circleColor: "#660000",
+    bgColor: "#880808",
+    circleColor: "#a52a2a",
   },
   {
     id: 2,
     title: "BREAKFAST",
     description:
       "Breakfast, often referred to as the ‘most important meal of the day’, provides essential nutrients to kick start our day. It includes a variety of foods, like fruits, cereals, dairy products, and proteins, that contribute to a balanced diet.",
-    image: "/resturent.png",
-    thumbnail: "/resturent.png",
-    bgColor: "#015f5d",
-    circleColor: "#004744",
+    image: "/banner-2.png",
+    thumbnail: "/banner-2.png",
+    bgColor: "#0a4669",
+    circleColor: "#0a3659",
   },
   {
     id: 3,
     title: "BREAKFAST",
     description:
       "Breakfast, often referred to as the ‘most important meal of the day’, provides essential nutrients to kick start our day. It includes a variety of foods, like fruits, cereals, dairy products, and proteins, that contribute to a balanced diet.",
-    image: "/res-1.png",
-    thumbnail: "/res-1.png",
-    bgColor: "#800000",
-    circleColor: "#660000",
+    image: "/banner-3.png",
+    thumbnail: "/banner-3.png",
+    bgColor: "#a95c68",
+    circleColor: "#953553",
   },
   {
     id: 4,
     title: "BREAKFAST",
     description:
       "Breakfast, often referred to as the ‘most important meal of the day’, provides essential nutrients to kick start our day. It includes a variety of foods, like fruits, cereals, dairy products, and proteins, that contribute to a balanced diet.",
-    image: "/resturent.png",
-    thumbnail: "/resturent.png",
-    bgColor: "#015f5d",
-    circleColor: "#004744",
+    image: "/banner-4.png",
+    thumbnail: "/banner-4.png",
+    bgColor: "#006666",
+    circleColor: "#003333",
   },
 ];
 
@@ -106,8 +107,9 @@ export default function BreakfastSlider() {
     },
     visible: {
       opacity: 1,
-      x: 0,
-      y: 0,
+      x: isMobile ? 0 :80,
+      y: isMobile ? 0 :  100,
+  
       rotate: 0,
       transition: {
         duration: 0.5,
@@ -128,7 +130,7 @@ export default function BreakfastSlider() {
 
   return (
     <motion.div
-      className="relative w-full h-screen overflow-hidden py-16"
+      className="relative w-full lg:h-[964px] px-8 md:px-12 lg:px-16 md:h-[900px] h-[812px] overflow-hidden py-16"
       animate={{ backgroundColor: bg.bgColor }}
       transition={{ duration: 0.5, ease: "easeInOut" }}
     >
@@ -156,15 +158,55 @@ export default function BreakfastSlider() {
       </AnimatePresence>
 
       {/* Main Content */}
-      <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between w-full h-full px-4 py-8">
+      <div className="relative z-10 flex flex-col-reverse md:flex-row items-center justify-between w-full h-full px-4 mt-0 sm:mt-12 md:mt-0 ">
         {/* Left Section (Text + Thumbnails) */}
-        <div className="w-full md:w-1/2 space-y-6 text-white text-center md:text-left">
-          <h1 className="text-4xl md:text-5xl font-bold">{bg.title}</h1>
-          <p className="text-sm md:text-md font-medium leading-relaxed max-w-xl mx-auto md:mx-0">
+        <div className="w-full md:w-1/2   md:space-y-12 text-white text-center md:text-left">
+          <h1 className="text-[45px] md:text-7xl lg:text-[96px] font-medium">
+            {bg.title}
+          </h1>
+          <p className="text-md md:text-lg lg:text-xl font-medium md:font-bold blading-relaxed max-w-xl mx-auto md:mx-0">
             {bg.description}
           </p>
+          {/* for mobile */}
+          <div className="w-full md:w-1/2 relative md:hidden flex justify-center items-center h-[300px] md:h-[800px]">
+            {/* Navigation Buttons (Mobile Only) */}
+            <div className="absolute top-1/2 -translate-y-1/2 flex justify-between items-center w-full px-0 md:hidden z-20">
+              <button
+                onClick={() =>
+                  setCurrent((prev) =>
+                    prev === 0 ? slides.length - 1 : prev - 1
+                  )
+                }
+                className="text-white bg-[#F5878752] rounded-full p-3 text-xl shadow-md"
+              >
+                <IoIosArrowBack />
+              </button>
+              <button
+                onClick={() =>
+                  setCurrent((prev) =>
+                    prev === slides.length - 1 ? 0 : prev + 1
+                  )
+                }
+                className="text-white bg-[#F5878752] rounded-full p-3 text-xl  shadow-md"
+              >
+                <IoIosArrowForward />
+              </button>
+            </div>
 
-          <div className="flex gap-4 justify-center md:justify-start mt-6">
+            <AnimatePresence mode="wait">
+              <motion.img
+                key={bg.image}
+                src={bg.image}
+                alt="main"
+                className="absolute object-contain h-[70%]  w-auto drop-shadow-2xl"
+                variants={arcTransition}
+                initial="hidden"
+                animate="visible"
+                exit="exit"
+              />
+            </AnimatePresence>
+          </div>
+          <div className="flex gap-4 justify-center md:justify-start mt-12 lg:mt-24">
             {slides.map((slide, index) => (
               <div
                 key={slide.id}
@@ -172,7 +214,7 @@ export default function BreakfastSlider() {
                 className="relative cursor-pointer"
               >
                 <div
-                  className={`rounded-full border-4 overflow-hidden w-[70px] h-[70px] md:w-[90px] md:h-[90px] transition duration-300 ${
+                  className={`rounded-full border-4 overflow-hidden w-[80px] h-[80px] md:w-[130px] md:h-[130px] lg:w-[160px] lg:h-[160px] transition duration-300 ${
                     index === current ? "border-white" : "border-transparent"
                   }`}
                 >
@@ -193,7 +235,7 @@ export default function BreakfastSlider() {
         </div>
 
         {/* Right Section (Image + Arrows) */}
-        <div className="w-full md:w-1/2 relative flex justify-center items-center h-[300px] md:h-[800px]">
+        <div className="w-full md:w-1/2 md:relative hidden md:flex justify-center items-center h-[300px] md:h-[800px]">
           {/* Navigation Buttons (Mobile Only) */}
           <div className="absolute top-1/2 -translate-y-1/2 flex justify-between items-center w-full px-4 md:hidden z-20">
             <button
