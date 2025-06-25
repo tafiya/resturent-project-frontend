@@ -31,4 +31,4 @@ This is the frontend for a restaurant management system built with **Next.js**, 
 
 ---
 
-
+![Live Preview](https://res.cloudinary.com/demnpqwx3/image/upload/v1750836679/resturent_pjic1i.png)
