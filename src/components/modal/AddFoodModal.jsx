@@ -46,7 +46,10 @@ export default function AddFoodModal({ isOpen, onClose }) {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/foods", form);
+      const res = await axios.post(
+        "https://bistro-boss-server-green-xi.vercel.app/menu",
+        form
+      );
       toast.success("Successfully Food added !");
       //   alert("Food added ✅");
       setForm({ name: "", category: "", image: "" });

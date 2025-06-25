@@ -9,8 +9,8 @@ const useFoods = () => {
 
   const fetchFoods = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/foods");
-      setFoods(res.data.data);
+      const res = await axios.get("https://bistro-boss-server-green-xi.vercel.app/menu");
+      setFoods(res.data);
     } catch (err) {
       setError("Failed to fetch foods");
     } finally {

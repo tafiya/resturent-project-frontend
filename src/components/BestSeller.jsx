@@ -18,6 +18,7 @@ const FoodTabs = () => {
       : foods.filter((food) => food.category === activeCategory);
 
   if (foodLoading || catLoading) return <p>Loading...</p>;
+  console.log(foods)
 console.log(categories);
   return (
     <div className="max-w-7xl mx-auto px-4 py-16">

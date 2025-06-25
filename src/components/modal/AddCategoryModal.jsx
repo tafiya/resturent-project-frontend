@@ -14,9 +14,12 @@ const AddCategoryModal = ({ isOpen, onClose }) => {
     }
 
     try {
-      const res = await axios.post("http://localhost:5000/api/categories", {
-        name: categoryName,
-      });
+      const res = await axios.post(
+        "https://bistro-boss-server-green-xi.vercel.app/carts",
+        {
+          name: categoryName,
+        }
+      );
       toast.success("Successfully Category added !");
       setCategoryName("");
       if (typeof onClose === "function") {

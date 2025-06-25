@@ -9,9 +9,11 @@ const useCategories = () => {
 
   const fetchCategories = async () => {
     try {
-      const res = await axios.get("http://localhost:5000/api/categories");
+      const res = await axios.get(
+        "https://bistro-boss-server-green-xi.vercel.app/carts"
+      );
       
-      const rawCategories = res.data.data;
+      const rawCategories = res.data;
 
       // ✅ Filter distinct categories by `name`
       const uniqueCategoriesMap = new Map();
